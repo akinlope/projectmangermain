@@ -84,22 +84,23 @@ export const MyApp = () => {
       <AddProject addProject={addProject} closeAddProject={closeAddProject} />
     );
   }
-
+  
   return (
     <>
-      <div className=" lg:hidden md:hidden p-2">
+    <div className=" h-screen">
+      <div className=" lg:hidden md:hidden p-2 h-[5%]">
         <button onClick={toggleSidebar}>
           {openHamburger ? <GiHamburgerMenu /> : <IoClose />}
         </button>
       </div>
-      <div className=" flex h-screen gap-2 ">
+      <div className=" flex gap-2 sm:h-[95%] md:h-screen lg:h-screen ">
         <SideBar
           openToAddProject={openAddProject}
           singleProject={singleProject}
           open={openHamburger}
         />
-
         {outlet}
+      </div>
       </div>
     </>
   );
