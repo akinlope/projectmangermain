@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SideBar } from "./components/SideBar";
 import { NoProjectSelected } from "./components/NoProjectSelected";
 import { AddProject } from "./components/AddProject";
@@ -6,26 +6,28 @@ import { ViewSingleProject } from "./components/ViewSingleProject";
 import { auth } from "./firebase";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoClose } from "react-icons/io5";
 
 export const MyApp = () => {
   const navigate = useNavigate();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [openHamburger, setOpenHamburger] = useState(false);
   const [projectState, setProjectState] = useState({
-  
     projectCurrentState: null,
     projects: [],
     tasks: [],
   });
 
-  // const toggleSidebar = () => {
-  //   setSidebarOpen(!sidebarOpen);
-  // };
+  const toggleSidebar = () => {
+    setOpenHamburger((prevState) => !prevState);
+  };
 
-  onAuthStateChanged(auth, (user) => {
-    if (!user) return navigate("/");
-  });
-
-
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) return navigate("/");
+    });
+    return () => unsubscribe;
+  }, [navigate]);
 
   // PROJECTS
   const addProject = () => {
@@ -71,7 +73,7 @@ export const MyApp = () => {
 
   let outlet = (
     <ViewSingleProject
-    onDeleteProject={deleteProject}
+      onDeleteProject={deleteProject}
       projectId={projectState.projectCurrentState}
     />
   );
@@ -84,12 +86,21 @@ export const MyApp = () => {
   }
 
   return (
-    <div className=" flex h-screen gap-2 ">
-      <SideBar
-        openToAddProject={openAddProject}
-        singleProject={singleProject}
-      />      
-      {outlet}
-    </div>
+    <>
+      <div className=" lg:hidden md:hidden p-2">
+        <button onClick={toggleSidebar}>
+          {openHamburger ? <GiHamburgerMenu /> : <IoClose />}
+        </button>
+      </div>
+      <div className=" flex h-screen gap-2 ">
+        <SideBar
+          openToAddProject={openAddProject}
+          singleProject={singleProject}
+          open={openHamburger}
+        />
+
+        {outlet}
+      </div>
+    </>
   );
 };

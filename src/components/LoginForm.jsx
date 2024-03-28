@@ -16,7 +16,7 @@ export const LoginForm = ({ check }) => {
     if (val.user.uid) return navigate("/mainpage");
   };
   return (
-    <section className="bg-sky-50 dark:bg-sky-600 rounded-md p-5">
+    <section className="bg-sky-50 dark:bg-sky-600 rounded-md lg:p-5 md:p-5 sm:p-2">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-sky-500 dark:border-sky-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

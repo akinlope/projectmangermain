@@ -34,7 +34,7 @@ export const AddTask = ({ projectId }) => {
   return (
     <>
       <Modal ref={dialog} />
-      <div className="flex justify-between">
+      <div className="flex lg:justify-between md:justify-between sm:gap-2">
         <input
           onChange={(e) => setText(e.target.value)}
           value={text}
@@ -43,7 +43,7 @@ export const AddTask = ({ projectId }) => {
         />
         <button
           onClick={handleAddTask}
-          className="px-1 bg-sky-500 text-sky-50 hover:bg-sky-700 hover:text-sky-200 rounded-sm"
+          className="lg:px-1 md:px-1 bg-sky-500 text-sky-50 hover:bg-sky-700 hover:text-sky-200 rounded-sm lg:text-base md:text-base sm:text-sm"
         >
           Add Task
         </button>

@@ -19,9 +19,9 @@ useEffect(()=> {
 }, [projectId]);
 
   return (
-    <div className=" ml-5 mt-20">
-      <div className=" flex justify-between w-[35rem] items-center">
-        <span className="  text-3xl uppercase text-sky-500  font-bold ">
+    <div className=" ml-5 mt-20 lg:p-4 md:p-4 sm:p-2 lg:w-[35rem] md:w-[35rem] sm:w-full p-2">
+      <div className=" flex justify-between w-full items-center">
+        <span className="  lg:text-3xl md:text-2xl sm:text-lg uppercase text-sky-500  font-bold ">
           {doc.title}
         </span>
         <span onClick={()=> {

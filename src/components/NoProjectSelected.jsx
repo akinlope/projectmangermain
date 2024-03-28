@@ -9,13 +9,13 @@ export const NoProjectSelected = ({openAddProject}) => {
         <img
           src={image}
           alt="No image logo"
-          className=" w-40 h-40 text-center"
+          className=" lg:w-40 md:w-40 sm:w-20 lg:h-40 md:h-40 sm:h-20 text-center"
         />
       </div>
-      <h1 className=" font-bold text-sky-600 text-3xl text-center my-10">
+      <h1 className=" font-bold text-sky-600 lg:text-3xl md:text-3xl sm:text-xl text-center my-10">
         No Project Selected
       </h1>
-      <p className=" font-semibold text-center text-2xl text-sky-400 mb-10">
+      <p className=" font-semibold text-center lg:text-2xl md:text-2xl sm:text-lg text-sky-400 mb-10">
         Select a project or get started with a new project.
       </p>
       <div className=" flex justify-center">

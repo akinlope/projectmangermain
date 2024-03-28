@@ -36,7 +36,7 @@ export const AddProject = ({ addProject, closeAddProject }) => {
   return (
     <>
       <Modal setError={setError} ref={dialogRef} buttonText={"Close"} />
-      <div className=" mt-20 w-[35rem]">
+      <div className=" mt-20 lg:w-[35rem] md:w-[35rem] sm:w-full p-2">
         <div className=" flex justify-end gap-4">
           <button onClick={closeAddProject} className=" hover:text-red-500">
             Cancle
