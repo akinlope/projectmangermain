@@ -46,7 +46,7 @@ export const SideBar = ({ openToAddProject, singleProject, open }) => {
       </div>
 
       {/* Sign-out button */}
-      <div className=" lg:ml-5 md:ml-5 sm:ml-1 mb-5 fixed bottom-0">
+      <div className=" lg:ml-5 md:ml-5 sm:ml-1 mb-5 md:fixed lg:fixed bottom-0">
         <button  onClick={()=>{handleSignOut; return navigate("/")}} className=" bg-red-600 hover:bg-red-900 lg:p-2 md:p-2 sm:p-1 rounded-md lg:px-4 md:px-4 text-white">SignOut</button>
       </div>
     </div>

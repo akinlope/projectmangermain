@@ -1,7 +1,6 @@
-import React, {useCallback, useState} from 'react'
+import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { GiHamburgerMenu } from "react-icons/gi";
-import { IoClose } from "react-icons/io5";
+import { Toaster } from "react-hot-toast"
 import { Authentication } from './components/Authentication'
 import { MyApp } from './MyApp'
 
@@ -22,10 +21,8 @@ export const App = () => {
   ])
   return (
     <>
-    
-
-    {/* <button onClick={console.log("Clicked")}><GiHamburgerMenu /></button> */}
     <RouterProvider router={router} />
+    <Toaster position="top-right" />
     </>
   )
 }

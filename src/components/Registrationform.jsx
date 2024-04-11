@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
-import { registerationFunction } from '../helpers';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { registerationFunction } from "../helpers";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast"
 
 
-export const Registrationform = ({check}) => {
-const [email, setEmail] = useState("")
-const [password, setPassword] = useState("")
-const [loading, setLoading] = useState(false)
-const navigate = useNavigate()
+export const Registrationform = ({ check }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-
-const handleRegister = async ()=> {
-  setLoading(prevState => !prevState)
-  const data = {
-    email,
-    password
+  const handleRegister = async () => {
+    if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i)) {
+      return toast.error("Invalid email");
+    } else if (password.trim().length < 8) {
+      return toast.error("Password cannot be lesser than 8-characters.");
+    }
+    setLoading((prevState) => !prevState);
+    const data = {
+      email,
+      password,
+    };
+    const val = await registerationFunction(data);
+    setLoading((prevState) => !prevState);
+    if (val.email) {
+      toast.success("Welcome");
+      return navigate("/mainpage");
+    } else {
+      return toast.error("Wrong email or password");
+    }
   };
-  const val = await registerationFunction(data);
-  setLoading(prevState => !prevState)
-  if(val.email) return navigate("/mainpage")
-}
-  
+
   return (
     <section className="bg-sky-50 dark:bg-sky-600 rounded-md lg:p-5 md:p-5 sm:p-2">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
@@ -96,7 +106,7 @@ const handleRegister = async ()=> {
                 </a>
               </div>
               <button
-              disabled={loading}
+                disabled={loading}
                 onClick={handleRegister}
                 type="submit"
                 className="w-full text-white bg-sky-600 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
@@ -106,7 +116,7 @@ const handleRegister = async ()=> {
               <p className="text-sm font-light text-sky-100 dark:text-sky-100">
                 Already have an account?{" "}
                 <a
-                onClick={check}
+                  onClick={check}
                   href="#"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
@@ -118,5 +128,5 @@ const handleRegister = async ()=> {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

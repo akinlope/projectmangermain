@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { loginFunction } from "../helpers";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
 
 export const LoginForm = ({ check }) => {
   const [email, setEmail] = useState("");
@@ -9,11 +11,21 @@ export const LoginForm = ({ check }) => {
   const navigate = useNavigate();
 
   const login = async () => {
+    if(!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i)){
+      return toast.error("Invalid email")
+    }else if(password.trim().length <8){
+      return toast.error("Password cannot be lesser than 8-characters.")
+    }
     setLoading((prevState) => !prevState);
     const data = { email, password };
     let val = await loginFunction(data);
     setLoading((prevState) => !prevState);
-    if (val.user.uid) return navigate("/mainpage");
+    if (val.user.uid) {
+      toast.success("Welcome");
+      return navigate("/mainpage");
+    } else {
+      return toast.error("Wrong email or password");
+    }
   };
   return (
     <section className="bg-sky-50 dark:bg-sky-600 rounded-md lg:p-5 md:p-5 sm:p-2">

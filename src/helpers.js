@@ -13,6 +13,7 @@ export const loginFunction = async (data) => {
         localStorage.setItem("uid", user.user.uid);
         return user
     } catch (err) {
+        return 400
     }
 }
 export const registerationFunction = async (data) => {
