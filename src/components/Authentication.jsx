@@ -6,7 +6,6 @@ import bg from "../img/bg.jpg"
 export const Authentication = () => {
   const [check, setCheck] = useState(false);
   const checkForm = () => {
-    // console.log("first")
     setCheck(prevState=> !prevState)
   }
   return (

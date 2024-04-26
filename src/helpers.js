@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
 import { auth } from "./firebase"
 import { db } from "./firebase"
 import { collection, doc, getDoc, getDocs, onSnapshot, setDoc, query, where, updateDoc, deleteDoc, serverTimestamp, orderBy } from "firebase/firestore";
@@ -36,6 +36,19 @@ export const registerationFunction = async (data) => {
     }
 }
 
+export const resetPassword = async (email) => {
+    console.log("clicked", email)
+    let res;
+    await sendPasswordResetEmail(auth, email)
+        .then(() => {
+            return res = 200;
+        })
+        .catch((error) => {
+            throw error
+        });
+    return res;
+}
+
 export const addProjectToFirebase = async (data) => {
     try {
         const docRef = doc(collection(db, "Projects"))
@@ -46,16 +59,19 @@ export const addProjectToFirebase = async (data) => {
     }
 }
 
-export const viewProjectTitle = async () => {
+
+export const viewProjectTitle = async (userID) => {
     const docArr = [];
     const colRef = collection(db, "Projects");
-    const q = query(colRef, orderBy("time", "desc"))
-    const docsSnapshot = await getDocs(q)
+    const q = query(colRef, where("userID", "==", userID), orderBy("time", "desc")); // Filter by userID
+    const docsSnapshot = await getDocs(q);
     docsSnapshot.forEach(doc => {
-        docArr.push(doc.data())
+        docArr.push(doc.data());
     });
     return docArr;
 }
+
+
 
 export const getSingleProject = async (id) => {
     try {
@@ -132,7 +148,9 @@ export const deleteProject = async (id) => {
 }
 
 export const handleSignOut = async () => {
+    console.log("clicked")
     try {
+        console.log("In signout")
         await signOut(auth);
         localStorage.clear("email");
         localStorage.clear("uid")

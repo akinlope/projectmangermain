@@ -96,7 +96,7 @@ export const LoginForm = ({ check }) => {
                 </div>
                 <a
                   onClick={()=> {return navigate("/reset")}}
-                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500 pl-2 cursor-pointer"
                 >
                   Forgot password?
                 </a>

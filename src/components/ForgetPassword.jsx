@@ -1,22 +1,29 @@
 import React, { useState } from "react";
-// import { loginFunction } from "../helpers";
+import { resetPassword } from "../helpers";
 import { useNavigate } from "react-router-dom";
-// import toast from "react-hot-toast";
-
+import toast from "react-hot-toast";
+import bg from "../img/bg.jpg"
 
 export const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const resetPasswrord = async () => {
+    setLoading((prevState) => !prevState);
+    if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i))
+      return toast.error("Invalid email");
+    const res = await resetPassword(email);
+    setEmail("");
+    if (res == 200)
+      return (
+        toast.success("Reset link sent to your email address.") && navigate("/")
+      );
+  };
 
-  const resetPasswrord = () => {
-    
-  }
-  
   return (
-    <section className="bg-sky-50 dark:bg-sky-600 rounded-md lg:p-5 md:p-5 sm:p-2 h-screen">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
+    <section className=" bg-cover h-screen flex w-screen" style={{ backgroundImage: `url(${bg})` }}>
+      <div className=" justify-center items-center mx-auto my-auto p-5 bg-sky-700 rounded-lg">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-sky-500 dark:border-sky-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-sky-900 md:text-2xl dark:text-white">
@@ -34,6 +41,7 @@ export const ForgetPassword = () => {
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
+                  value={email}
                   type="email"
                   name="email"
                   id="email"
@@ -42,8 +50,7 @@ export const ForgetPassword = () => {
                   required
                 />
               </div>
-              
-             
+
               <button
                 disabled={loading}
                 onClick={resetPasswrord}
@@ -51,7 +58,12 @@ export const ForgetPassword = () => {
               >
                 Reset Password
               </button>
-              <button className="text-sm font-light text-sky-100 dark:text-sky-100">
+              <button
+                onClick={() => {
+                  navigate(-1);
+                }}
+                className="text-sm font-semibold text-sky-100 dark:text-sky-100 px-4 p-1 border-2 border-sky-800 hover:bg-sky-800 rounded-md"
+              >
                 Go Back
               </button>
             </div>

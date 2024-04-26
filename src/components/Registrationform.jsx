@@ -78,7 +78,7 @@ export const Registrationform = ({ check }) => {
                   required
                 />
               </div>
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
@@ -104,7 +104,7 @@ export const Registrationform = ({ check }) => {
                 >
                   Forgot password?
                 </a>
-              </div>
+              </div> */}
               <button
                 disabled={loading}
                 onClick={handleRegister}

@@ -30,7 +30,7 @@ useEffect(()=> {
         }
           } className=" text-stone-500 hover:text-red-500 font-semibold cursor-pointer">Delete</span>
       </div>
-      <div className=" text-stone-500 my-5 font-medium">{formattedDate}</div>
+      <div className=" text-stone-500 my-5 font-medium">Due date: {formattedDate}</div>
       <div className=" text-sky-950 font-medium whitespace-pre-wrap">{doc.description}</div>
       <div className=" border-b-2 border-sky-800 mt-5 mb-10"></div>
       <h1 className=" font-bold text-stone-500">ADD TASK</h1>
