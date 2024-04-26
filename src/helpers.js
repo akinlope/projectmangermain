@@ -43,7 +43,6 @@ export const addProjectToFirebase = async (data) => {
         await setDoc(docRef, newData)
         return docRef.id;
     } catch (error) {
-
     }
 }
 
