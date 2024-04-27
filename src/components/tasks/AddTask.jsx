@@ -50,7 +50,7 @@ export const AddTask = ({ projectId }) => {
       </div>
 
       {/* Render the list of tasks */}
-      <ul className=" bg-red-500 overflow-auto">
+      <ul className="">
         {tasks.length != 0 ? (
           tasks.map((task) => (
             <ul
