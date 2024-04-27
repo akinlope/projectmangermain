@@ -104,7 +104,7 @@ export const updateTaskStatus = async ({ id, done }) => {
 export const getExactTast = async (id) => {
     const taskArr = []
     const colRef = collection(db, "Tasks");
-    const q = query(colRef, where("projectId", "==", id));
+    const q = query(colRef, where("projectId", "==", id), orderBy("time", "desc"));
     const docSnap = await getDocs(q);
     docSnap.forEach(doc => {
         taskArr.push(doc.data())
